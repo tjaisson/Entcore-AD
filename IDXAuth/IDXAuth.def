@@ -1,0 +1,10 @@
+EXPORTS
+LsaApCallPackage
+LsaApCallPackagePassthrough
+LsaApCallPackageUntrusted
+LsaApInitializePackage
+LsaApLogonTerminated
+LsaApLogonUser
+LsaApLogonUserEx
+LsaApLogonUserEx2
+
