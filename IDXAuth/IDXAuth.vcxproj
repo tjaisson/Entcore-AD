@@ -14,6 +14,7 @@
     <ProjectGuid>{A2C540D3-00AC-4D4A-8AF2-42B471D8F70A}</ProjectGuid>
     <RootNamespace>IDXAuth</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -101,6 +102,10 @@
   <ItemGroup>
     <ClInclude Include="IDXAuth.h" />
     <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="msv1_0.dll" />
+    <None Include="reg.reg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

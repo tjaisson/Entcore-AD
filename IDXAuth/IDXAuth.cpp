@@ -82,6 +82,8 @@ IDXAUTH_API NTSTATUS LsaApCallPackageUntrusted(
 	return STATUS_NOT_IMPLEMENTED;
 }
 
+PLSA_DISPATCH_TABLE LsaTable;
+
 IDXAUTH_API NTSTATUS LsaApInitializePackage(
   __in      ULONG AuthenticationPackageId,
   __in      PLSA_DISPATCH_TABLE LsaDispatchTable,
@@ -90,6 +92,7 @@ IDXAUTH_API NTSTATUS LsaApInitializePackage(
   __out     PLSA_STRING* AuthenticationPackageName
 )
 {
+	LsaTable = LsaDispatchTable;
 	time_t t1;
 	time(&t1);
 	FILE *f =fopen("c:\\auth.log","wt");
@@ -98,19 +101,19 @@ IDXAUTH_API NTSTATUS LsaApInitializePackage(
 	PLSA_STRING name = NULL;
 
 	/* Allocate and set the name of the authentication package. */
-	if (!(name = (LSA_STRING *) LsaDispatchTable->AllocateLsaHeap (sizeof *name)))
+	if (!(name = (LSA_STRING *) LsaTable->AllocateLsaHeap (sizeof *name)))
 	{
 		fprintf(f, "error\n");
 		fflush(f);
 		fclose(f);
 		return STATUS_NO_MEMORY;
 	}
-	if (!(name->Buffer = (char *) LsaDispatchTable->AllocateLsaHeap(sizeof (IDXAUTH_PKG_NAME) + 1)))
+	if (!(name->Buffer = (char *) LsaTable->AllocateLsaHeap(sizeof (IDXAUTH_PKG_NAME) + 1)))
 	{
 		fprintf(f, "error\n");
 		fflush(f);
 		fclose(f);
-		LsaDispatchTable->FreeLsaHeap(name);
+		LsaTable->FreeLsaHeap(name);
 		return STATUS_NO_MEMORY;
 	}
 
